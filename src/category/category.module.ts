@@ -18,6 +18,6 @@ import { Category, CategorySchema } from './data/category.schema';
     { provide: ICategoryRepository, useClass: CategoryRepository },
   ],
 
-  exports: [],
+  exports: [CategoryService],
 })
 export class CategoryModule {}

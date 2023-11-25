@@ -1,5 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { Schema as MongooseSchema } from 'mongoose';
+import { CategoryDocument } from 'src/category/data/category.schema';
 
 @Schema({ _id: false })
 export class Unit {
@@ -35,6 +37,9 @@ export class RawMaterial {
     type: Number,
   })
   stock: number;
+
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Category' })
+  category: string | CategoryDocument;
 }
 
 export const RawMaterialSchema = SchemaFactory.createForClass(RawMaterial).set(

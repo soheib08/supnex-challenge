@@ -33,7 +33,7 @@ export class SupplierMaterialController {
     return await this.supplierMaterialService.addSupplierMaterial(request);
   }
 
-  @Patch()
+  @Patch('set-stock')
   @ApiBody({
     type: SupplierMaterialStockDto,
   })
@@ -44,7 +44,7 @@ export class SupplierMaterialController {
     return await this.supplierMaterialService.changeStock(request);
   }
 
-  @Patch()
+  @Patch('set-price')
   @ApiBody({
     type: SupplierMaterialPriceDto,
   })

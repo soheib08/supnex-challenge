@@ -38,7 +38,7 @@ export class CategoryService {
     let res = new CategoryListDto();
     res.items = new Array<CategoryItemDto>();
 
-    for await (const category of foundCategories) {
+    for (const category of foundCategories) {
       res.items.push({
         id: category.id,
         title: category.title,

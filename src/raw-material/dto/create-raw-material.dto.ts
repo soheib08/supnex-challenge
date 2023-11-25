@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsNotEmpty, IsString, ValidateNested } from 'class-validator';
+import { IsMongoId, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
 
 export class UnitDto {
   @ApiProperty({
@@ -36,4 +36,8 @@ export class CreateRawMaterialDto {
   @Type(() => UnitDto)
   @IsNotEmpty()
   unit: UnitDto;
+
+  @ApiProperty({ example: '6406f19211c2440bc2e12f1b' })
+  @IsMongoId()
+  category_id: string;
 }

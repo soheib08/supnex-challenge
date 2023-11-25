@@ -12,11 +12,11 @@ import { RawMaterialService } from '../../raw-material/raw-material.service';
 import { CategoryService } from '../../category/category.service';
 import { SupplierService } from '../../supplier/supplier.service';
 import { AddSupplierMaterialDto } from '../dto/add-supplier-material.dto';
-import { CategoryModule } from '../../category/category.module';
 import { RawMaterialModule } from '../../raw-material/raw-material.module';
 import { SupplierModule } from '../../supplier/supplier.module';
 import { SupplierMaterialPriceDto } from '../dto/material-price.dto';
 import { SupplierMaterialStockDto } from '../dto/material-stock.dto';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 describe('supplier material controller', () => {
   let controller: SupplierMaterialController;
@@ -29,11 +29,11 @@ describe('supplier material controller', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
-        MongooseModule.forRoot('mongodb://localhost:27017/raw-material'),
+        MongooseModule.forRoot('mongodb://localhost:27017/raw-material-test'),
         MongooseModule.forFeature([
           { name: SupplierMaterial.name, schema: SupplierMaterialSchema },
         ]),
-        CategoryModule,
+        EventEmitterModule.forRoot(),
         RawMaterialModule,
         SupplierModule,
       ],
@@ -66,9 +66,11 @@ describe('supplier material controller', () => {
   });
 
   it('should add a material for a supplier', async () => {
+    let createdCategory = await categoryService.createCategory({title:'category6'})
     let createdMaterial = await materialService.createRawMaterial({
       name: 'tomato',
       unit: { name: 'gram', symbol: 'gr' },
+      category_id: createdCategory.id
     });
     let createdSupplier = await supplierService.createSupplier({
       title: 'supplier',
@@ -89,9 +91,11 @@ describe('supplier material controller', () => {
   });
 
   it('should change price', async () => {
+    let createdCategory = await categoryService.createCategory({title:'category4'})
     let createdMaterial = await materialService.createRawMaterial({
       name: 'tomato',
       unit: { name: 'gram', symbol: 'gr' },
+      category_id: createdCategory.id
     });
     let createdSupplier = await supplierService.createSupplier({
       title: 'supplier',
@@ -114,9 +118,11 @@ describe('supplier material controller', () => {
   });
 
   it('should change  stock', async () => {
+    let createdCategory = await categoryService.createCategory({title:'category5'})
     let createdMaterial = await materialService.createRawMaterial({
       name: 'tomato',
       unit: { name: 'gram', symbol: 'gr' },
+      category_id:createdCategory.id
     });
     let createdSupplier = await supplierService.createSupplier({
       title: 'supplier',

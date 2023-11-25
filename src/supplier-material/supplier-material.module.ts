@@ -8,12 +8,16 @@ import { SupplierMaterialController } from './supplier-material.controller';
 import { SupplierMaterialService } from './supplier-material.service';
 import SupplierMaterialRepository from './data/supplier-material.repository';
 import { ISupplierMaterialRepository } from './interface/ISupplier-material.repository';
+import { SupplierModule } from '../supplier/supplier.module';
+import { RawMaterialModule } from '../raw-material/raw-material.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: SupplierMaterial.name, schema: SupplierMaterialSchema },
     ]),
+    SupplierModule,
+    RawMaterialModule
   ],
   controllers: [SupplierMaterialController],
   providers: [
@@ -24,6 +28,6 @@ import { ISupplierMaterialRepository } from './interface/ISupplier-material.repo
       useClass: SupplierMaterialRepository,
     },
   ],
-  exports: [],
+  exports: [SupplierMaterialService],
 })
 export class SupplierMaterialModule {}

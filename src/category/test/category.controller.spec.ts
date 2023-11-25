@@ -18,7 +18,7 @@ describe('category controller', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
-        MongooseModule.forRoot('mongodb://localhost:27017/raw-material'),
+        MongooseModule.forRoot('mongodb://localhost:27017/raw-material-test'),
         MongooseModule.forFeature([
           { name: Category.name, schema: CategorySchema },
         ]),

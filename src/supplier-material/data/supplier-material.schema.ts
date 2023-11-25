@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { Schema as MongooseSchema } from 'mongoose';
 
 export type SupplierMaterialDocument = HydratedDocument<SupplierMaterial>;
 
@@ -7,16 +8,10 @@ export type SupplierMaterialDocument = HydratedDocument<SupplierMaterial>;
 export class SupplierMaterial {
   id: string;
 
-  @Prop({
-    required: true,
-    type: String,
-  })
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Supplier' })
   supplier_id: string;
 
-  @Prop({
-    required: true,
-    type: String,
-  })
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'RawMaterial' })
   material_id: string;
 
   @Prop({

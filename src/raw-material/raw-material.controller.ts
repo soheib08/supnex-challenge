@@ -20,12 +20,17 @@ import { CreateRawMaterialDto } from './dto/create-raw-material.dto';
 import { UpdateRawMaterialDto } from './dto/update-raw-material.dto';
 import { RawMaterialService } from './raw-material.service';
 import { RawMaterialDto } from './dto/get-raw-material.dto';
+import { RawMaterialListDto } from './dto/get-raw-material-list.dto';
+import { RawMaterialListService } from './raw-material-list.service';
 
 @ApiTags('RawMaterial')
 @ApiBearerAuth()
 @Controller('raw-materials')
 export class RawMaterialController {
-  constructor(private readonly RawMaterialService: RawMaterialService) {}
+  constructor(
+    private readonly RawMaterialService: RawMaterialService,
+    private readonly RawMaterialListService: RawMaterialListService
+    ) {}
 
   @Post()
   @ApiBody({
@@ -36,12 +41,12 @@ export class RawMaterialController {
    return await this.RawMaterialService.createRawMaterial(request);
   }
 
-  // @Get()
-  // @ApiResponse({ type: RawMaterialListDto })
-  // @HttpCode(HttpStatus.OK)
-  // async getRawMaterialList(): Promise<RawMaterialListDto> {
-  //   return this.RawMaterialService.getRawMaterialList();
-  // }
+  @Get()
+  @ApiResponse({ type: RawMaterialListDto })
+  @HttpCode(HttpStatus.OK)
+  async getRawMaterialList(): Promise<RawMaterialListDto> {
+    return this.RawMaterialListService.getRawMaterialList();
+  }
 
   @Get(':id')
   @ApiParam({

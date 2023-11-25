@@ -6,6 +6,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CategoryModule } from './category/category.module';
 import { SupplierModule } from './supplier/supplier.module';
 import { RawMaterialModule } from './raw-material/raw-material.module';
+import { SupplierMaterialModule } from './supplier-material/supplier-material.module';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
   imports: [
@@ -19,9 +21,11 @@ import { RawMaterialModule } from './raw-material/raw-material.module';
       inject: [ConfigService],
       imports: [],
     }),
+    EventEmitterModule.forRoot(),
     CategoryModule,
     SupplierModule,
     RawMaterialModule,
+    SupplierMaterialModule
   ],
   controllers: [AppController],
   providers: [AppService],

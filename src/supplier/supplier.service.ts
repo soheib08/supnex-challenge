@@ -38,7 +38,7 @@ export class SupplierService {
     let res = new SupplierListDto();
     res.items = new Array<SupplierItemDto>();
 
-    for await (const Supplier of foundSuppliers) {
+    for (const Supplier of foundSuppliers) {
       res.items.push({
         id: Supplier.id,
         title: Supplier.title,
