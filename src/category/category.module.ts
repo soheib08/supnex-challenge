@@ -16,7 +16,6 @@ import { Category, CategorySchema } from './data/category.schema';
   providers: [
     CategoryService,
     { provide: ICategoryRepository, useClass: CategoryRepository },
-    
   ],
 
   exports: [],

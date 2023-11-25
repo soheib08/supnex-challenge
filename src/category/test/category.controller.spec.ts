@@ -41,7 +41,7 @@ describe('category controller', () => {
     expect(controller).toBeDefined();
   });
 
-  it('should create category', async () => {
+  it('should create and return a category', async () => {
     let result = await controller.create(createCategoryDto);
 
     expect(result).toHaveProperty('id');
@@ -49,7 +49,7 @@ describe('category controller', () => {
     expect(result.title).toEqual(createCategoryDto.title);
   });
 
-  it('should update category', async () => {
+  it('should update a category', async () => {
     let result = await controller.create(createCategoryDto);
     let updateCategoryDto: UpdateCategoryDto = {
       id: result.id,
@@ -67,8 +67,7 @@ describe('category controller', () => {
     await service.deleteCategory(result.id);
 
     let categoryList = await service.getCategoryList();
-    console.log(categoryList);
-    
+
     let isDeleted = categoryList.items.every(
       (category) => category.id !== result.id,
     );
