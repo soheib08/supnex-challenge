@@ -18,14 +18,14 @@ each module contains request dtos, repositories, interface of repository, servic
 Category module is responsible for crud api management of category. and supplier module as well for crud api management of supplier.
 Raw material module contains raw material crud api, and a separate service for get raw material list (project requirement). Supplier-material module is responsible for handling supplier's material stocks and prices.
 
-## Project requirements
+## Project Requirements
 
 - Nestjs : done
 - Mongodb or postgreSql: I used mongodb because of aggregation pipeline in raw materials list service. I think postgresql is better for structured data, but i choose mongo for given reason.
 - Testing and tdd: All apis are tested and covered by jest successfully. for tdd approach, i tried my best to do as it requested but for lack of time and my lack of experience of tdd approach, i think i would not do it correctly.
 - Documentation and git repo: Based on this file, done :)
 
-## Plus requirements
+## Plus Requirements
 
 - docker : done. In following section i explain how to project this with docker
 - events: done. When a supplier stock changes in add material for supplier api or by change stock api, a "stock.updated" event emits and raw material module handle this event and update given raw material stock in db.
@@ -56,6 +56,7 @@ Make sure you have the following installed before running the app locally:
 - MongoDB
 
   In each case you can see the swagger api documentation on "localhost:3000/api"
+  The main api that shows a list of material based on challenge is: "localhost:3000/api/raw-materials"
 
 
 ### Running Tests
