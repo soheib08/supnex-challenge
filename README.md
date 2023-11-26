@@ -1,73 +1,65 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Supnex-challenge
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Description of supnex backend challenge.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Table of Contents
 
-## Description
+- [Project Description](#project-description)
+- [Project requirements](#Project-requirements)
+- [Plus requirements](#Plus-requirements)
+- [Getting Started](#getting-started)
+  - [Running the App](#running-the-app)
+  - [Running Tests](#running-tests)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Project Description
 
-## Installation
+This project is based on Nestjs. It has 4 modules: category, raw material, supplier and supplier-material.
+each module contains request dtos, repositories, interface of repository, services, controllers and a mongodb schema and may have event emitters and event handlers.
+Category module is responsible for crud api management of category. and supplier module as well for crud api management of supplier.
+Raw material module contains raw material crud api, and a separate service for get raw material list (project requirement). Supplier-material module is responsible for handling supplier's material stocks and prices.
 
-```bash
-$ npm install
-```
+## Project requirements
 
-## Running the app
+- Nestjs : done
+- Mongodb or postgreSql: I used mongodb because of aggregation pipeline in raw materials list service. I think postgresql is better for structured data, but i choose mongo for given reason.
+- Testing and tdd: All apis are tested and covered by jest successfully. for tdd approach, i tried my best to do as it requested but for lack of time and my lack of experience of tdd approach, i think i would not do it correctly.
+- Documentation and git repo: Based on this file, done :)
 
-```bash
-# development
-$ npm run start
+## Plus requirements
 
-# watch mode
-$ npm run start:dev
+- docker : done. In following section i explain how to project this with docker
+- events: done. When a supplier stock changes in add material for supplier api or by change stock api, a "stock.updated" event emits and raw material module handle this event and update given raw material stock in db.
+- microservice and queue management: not unfortunately
 
-# production mode
-$ npm run start:prod
-```
+## Getting Started
 
-## Test
+### Running the App
+
+For running the app with docker please use this command:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+docker-compose up
 ```
 
-## Support
+For running the app locally please run the following commands:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+cd project directory
+npm install
+npm run start
+```
 
-## Stay in touch
+Make sure you have the following installed before running the app locally:
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Node.js
+- npm
+- MongoDB
 
-## License
+  In each case you can see the swagger api documentation on "localhost:3000/api"
 
-Nest is [MIT licensed](LICENSE).
+
+### Running Tests
+For running tests you can use 
+```bash
+npm run test
+```

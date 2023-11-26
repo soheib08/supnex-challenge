@@ -12,6 +12,7 @@ import {
 import {
   ApiBearerAuth,
   ApiBody,
+  ApiOperation,
   ApiParam,
   ApiResponse,
   ApiTags,
@@ -42,6 +43,7 @@ export class RawMaterialController {
   }
 
   @Get()
+  @ApiOperation({summary:'api for returning list of raw material based on given challenge'})
   @ApiResponse({ type: RawMaterialListDto })
   @HttpCode(HttpStatus.OK)
   async getRawMaterialList(): Promise<RawMaterialListDto> {
